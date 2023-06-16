@@ -71,7 +71,7 @@ class JobPaths:
 
     @property
     def result_pickle(self) -> Path:
-        return self._format_id(self.folder / "%j_%t_result.pkl")
+        return self._format_id(self.folder / "%j_result.pkl")
 
     @property
     def stderr(self) -> Path:
