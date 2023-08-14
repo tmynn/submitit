@@ -60,7 +60,8 @@ def process_job(folder: Union[Path, str]) -> None:
             del result
             logger.info("Exitting after successful completion")
     except Exception as error:  # TODO: check pickle methods for capturing traceback; pickling and raising
-        delayed.function.on_job_fail()
+        if hasattr(delayed.function, "on_job_fail"):
+            delayed.function.on_job_fail()
         try:
             with utils.temporary_save_path(paths.result_pickle) as tmppath:
                 utils.cloudpickle_dump(("error", traceback.format_exc()), tmppath)
